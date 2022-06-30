@@ -176,7 +176,7 @@ exports.release_client = (socket, port, host, local_addr, error) => {
     function sockend () {
         socket.__fromPool = false;
         if (server.notes.pool && server.notes.pool[name]) {
-            server.notes.pool[name].destroy(socket);
+            server.notes.pool[name].destroy(socket).catch(err => logger.logwarn(err));
         }
         else {
             socket.removeAllListeners();
